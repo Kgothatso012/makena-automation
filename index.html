@@ -201,6 +201,96 @@
             box-shadow: 0 10px 30px -10px rgba(26, 58, 92, 0.4);
         }
 
+        /* Hamburger Button */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 36px;
+            height: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile Navigation Menu */
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-mobile.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .nav-mobile ul {
+            list-style: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .nav-mobile ul li a {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: color 0.2s;
+        }
+
+        .nav-mobile ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-mobile-cta {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
         /* Hero Section */
         .hero {
             position: relative;
@@ -2454,14 +2544,61 @@
             }
 
             .hero {
-                padding: 6rem 1.5rem 4rem;
+                padding: 5rem 1.25rem 3rem;
+                min-height: 100dvh;
+            }
+
+            .hero-content {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.2rem, 10vw, 3rem);
+                line-height: 1.1;
+            }
+
+            .hero-sub {
+                font-size: 0.95rem;
+                max-width: 100%;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .hero-ctas .btn {
+                width: 100%;
+                justify-content: center;
             }
 
             section {
-                padding: 5rem 1.5rem;
+                padding: 4rem 1.25rem;
+            }
+
+            .section-header {
+                text-align: left;
+            }
+
+            .section-title {
+                font-size: clamp(1.75rem, 7vw, 2.5rem);
             }
 
             .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .github-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -2473,9 +2610,25 @@
                 grid-template-columns: 1fr;
             }
 
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
             .about-stats {
                 grid-template-columns: 1fr;
                 text-align: center;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .build-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
 
             .footer-top {
@@ -2489,12 +2642,113 @@
                 text-align: center;
             }
 
+            .footer-bottom p:last-child {
+                display: none;
+            }
+
             .cursor, .cursor-dot {
                 display: none;
             }
 
             body {
                 cursor: auto;
+            }
+
+            /* Mobile nav */
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+
+            /* Services Overview mobile */
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+            .service-item {
+                padding: 2rem 1.5rem;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+            }
+            .service-item:last-child {
+                border-right: none;
+            }
+
+            /* Client logos mobile */
+            .logos-bar {
+                padding: 4rem 1.25rem;
+            }
+            .logos-label {
+                font-size: 0.72rem;
+            }
+            .logos-track {
+                gap: 2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .logo-item {
+                font-size: 0.9rem;
+            }
+
+            /* FAQ mobile */
+            .faq-section {
+                padding: 5rem 1.25rem;
+            }
+            .faq-question {
+                font-size: 0.95rem;
+                padding: 1.25rem 1.5rem;
+            }
+            .faq-answer-inner {
+                font-size: 0.9rem;
+                padding: 0 1.5rem 1.25rem;
+            }
+
+            /* Projects / GitHub mobile */
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .projects-section {
+                padding: 5rem 1.25rem;
+            }
+            .project-card {
+                padding: 1.5rem;
+            }
+            .project-card h3 {
+                font-size: 1.1rem;
+            }
+            .btn-github {
+                padding: 0.875rem 1.75rem;
+                font-size: 0.875rem;
+            }
+            /* WhatsApp button mobile */
+            .whatsapp-btn {
+                bottom: 1.25rem;
+                right: 1.25rem;
+                padding: 0.875rem 1.25rem;
+                font-size: 0.8rem;
+            }
+
+            /* Geometric accents mobile */
+            .geo-accent {
+                display: none;
+            }
+
+            /* Contact form mobile */
+            #contact form {
+                padding: 1.5rem;
+            }
+
+            /* Trusted logos scroll */
+            .trusted-logos {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .trusted-logos-inner {
+                min-width: 600px;
             }
         }
     </style>
@@ -2528,6 +2782,20 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <a href="#contact" class="nav-cta">Get Started</a>
+            <button class="nav-hamburger" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+            <ul>
+                <li><a href="#portfolio">Work</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#websites">Websites</a></li>
+                <li><a href="#build">Build</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-mobile-cta">Get Started</a>
         </div>
     </nav>
 
@@ -3940,6 +4208,24 @@
             }, { threshold: 0.15 });
             observer.observe(el);
         });
+
+        // Mobile navigation
+        const navToggle = document.getElementById('navToggle');
+        const navMobile = document.getElementById('navMobile');
+        if (navToggle && navMobile) {
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('active');
+                navMobile.classList.toggle('open');
+                document.body.style.overflow = navMobile.classList.contains('open') ? 'hidden' : '';
+            });
+            navMobile.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.classList.remove('active');
+                    navMobile.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
     </script>
 </body>
 </html>
