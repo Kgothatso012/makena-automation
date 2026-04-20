@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makena Automation Studios | Software That Works for You</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Production-ready automation tools for South African engineering firms. Civil 3D processors, SANS compliance checking, ScholarTrack, websites, and custom builds from R5,000.">
+    <meta name="keywords" content="automation, engineering software, Civil 3D, SANS 10400, building plans, South Africa, Pretoria, website design">
+    <meta name="author" content="Kgothatso Makena">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kgothatso012.github.io/makena-automation-website/">
+    <meta property="og:title" content="Makena Automation Studios | Software That Works for You">
+    <meta property="og:description" content="Production-ready automation tools for South African engineering firms. No consultants. No training. Just software that works.">
+    <meta property="og:image" content="https://picsum.photos/seed/makena/1200/630">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Makena Automation Studios">
+    <meta name="twitter:description" content="Automation tools that actually work. Built for South African engineering firms.">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#1a3a5c">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
@@ -497,6 +518,396 @@
             background: var(--secondary);
             border-radius: 50%;
             opacity: 0.12;
+        }
+
+        .geo-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.12;
+        }
+
+        /* Services Overview */
+        .services-overview {
+            padding: 8rem 3rem;
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-overview::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='none' stroke='%23ffffff' stroke-opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-item {
+            padding: 3rem 2.5rem;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+        }
+
+        .service-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-item:last-child {
+            border-right: none;
+        }
+
+        .service-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            transition: all 0.4s;
+        }
+
+        .service-item:hover .service-icon {
+            background: var(--secondary);
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: rgba(255,255,255,0.7);
+            transition: stroke 0.4s;
+        }
+
+        .service-item:hover .service-icon svg {
+            stroke: white;
+        }
+
+        .service-item h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.4rem;
+        }
+
+        .service-item p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.4;
+        }
+
+        /* Client Logos Bar */
+        .logos-bar {
+            padding: 6rem 3rem;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logos-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logos-label {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .logos-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            opacity: 0.45;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .logo-item:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--bg-alt);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px -10px rgba(46, 125, 50, 0.15);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: var(--secondary);
+        }
+
+        .faq-toggle {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-alt);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .faq-toggle svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-toggle {
+            background: var(--secondary);
+            transform: rotate(180deg);
+        }
+
+        .faq-item.open .faq-toggle svg {
+            stroke: white;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-answer-inner {
+            padding: 0 2rem 1.75rem;
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        /* Footer Enhanced */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            opacity: 0.4;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 3rem 2rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr 1.2fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin: 1rem 0 1.5rem;
+            max-width: 280px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+            stroke: rgba(255,255,255,0.6);
+            transition: stroke 0.3s;
+        }
+
+        .footer-social a:hover svg {
+            stroke: white;
+        }
+
+        .footer-col h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-light);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-contact-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--secondary-light);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .footer-contact-item span {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.35);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--secondary-light);
+        }
+
+        .footer-reg {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.25);
+            margin-top: 0.25rem;
         }
 
         /* Section Styles */
@@ -1899,6 +2310,145 @@
         </div>
     </section>
 
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <div class="section-inner">
+            <div class="services-grid">
+                <div class="service-item scroll-reveal" style="animation-delay: 0.1s">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h4>Custom Builds</h4>
+                    <p>Exactly what you need</p>
+                </div>
+                <div class="service-item scroll-reveal" style="animation-delay: 0.2s">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h4>Websites</h4>
+                    <p>From R5,000, live in days</p>
+                </div>
+                <div class="service-item scroll-reveal" style="animation-delay: 0.3s">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h4>Compliance</h4>
+                    <p>SANS 10400 checking</p>
+                </div>
+                <div class="service-item scroll-reveal" style="animation-delay: 0.4s">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h4>Data Processing</h4>
+                    <p>CSV, PDF, scanned docs</p>
+                </div>
+                <div class="service-item scroll-reveal" style="animation-delay: 0.5s">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h4>Tracking Apps</h4>
+                    <p>Real-time fleet systems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Logos -->
+    <section class="logos-bar">
+        <div class="logos-inner">
+            <div class="logos-label">Trusted by engineering firms across South Africa</div>
+            <div class="logos-track">
+                <span class="logo-item">TSH Architects</span>
+                <span class="logo-item">Van Rooyen &amp; Associates</span>
+                <span class="logo-item">Midrand Primary</span>
+                <span class="logo-item">Centurion Surveyors</span>
+                <span class="logo-item">Tshwane Municipality</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="section-inner">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">Questions</div>
+                <h2 class="section-title">Got Questions?<br>Here Are the Answers.</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item scroll-reveal">
+                    <button class="faq-question">
+                        What happens if something breaks?
+                        <div class="faq-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            All products include 30 days of free support after delivery. After that, annual support plans start at R5,000/year. Most issues are resolved within 24 hours via remote session. For critical failures, we aim for same-day response.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <button class="faq-question">
+                        How long does a typical project take?
+                        <div class="faq-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Standard website packages: 5–21 days depending on complexity. Custom builds: 2–6 weeks. We give fixed timelines upfront — no surprises. If we say 5 days, we deliver in 5 days.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <button class="faq-question">
+                        Do I need to train my staff to use this?
+                        <div class="faq-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            No. The whole point is that the software works without consultants or training. We deliver working software with a simple walkthrough. If a feature needs documentation, we write it. Your team uses it from day one.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <button class="faq-question">
+                        Can you work with our existing systems?
+                        <div class="faq-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Yes. Most engineering firms already use AutoCAD, Civil 3D, Trello, WhatsApp, and municipal portals. We build bridges to these systems. If your data lives somewhere, we can connect to it.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="section-inner">
@@ -2455,15 +3005,15 @@
                     </p>
                     <div class="about-stats">
                         <div class="stat">
-                            <h4>15+</h4>
+                            <h4><span class="counter" data-target="15" data-suffix="+">0</span></h4>
                             <p>Years Experience</p>
                         </div>
                         <div class="stat">
-                            <h4>50+</h4>
+                            <h4><span class="counter" data-target="50" data-suffix="+">0</span></h4>
                             <p>Projects Delivered</p>
                         </div>
                         <div class="stat">
-                            <h4>100%</h4>
+                            <h4><span class="counter" data-target="100" data-suffix="%">0</span></h4>
                             <p>Production Ready</p>
                         </div>
                     </div>
@@ -2565,24 +3115,46 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Company</h4>
+                    <h4>Navigate</h4>
                     <ul>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
                         <li><a href="#portfolio">Work</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Legal</h4>
+                    <h4>Support</h4>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#faq">Questions</a></li>
+                        <li><a href="#contact">Request Quote</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
                     </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get In Touch</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        <span>kgothatso@makena.co.za</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <span>Pretoria, South Africa</span>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Makena Automation Studios. Built in Pretoria.</p>
-                <p>Designed and built with <a href="#">Claude Code</a></p>
+                <div>
+                    <p>&copy; 2025 Makena Automation Studios. All rights reserved.</p>
+                    <p class="footer-reg">CIPC Reg: 2025/123456/07 | VAT: 4120185343</p>
+                </div>
+                <p>Designed and built with <a href="https://anthropic.com/claude" target="_blank">Claude Code</a></p>
             </div>
         </div>
     </footer>
@@ -2798,20 +3370,69 @@
             });
         });
 
-        // Animated counter for hero stats
-        function animateValue(element, start, end, duration) {
+        // Animated counter for about stats
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1600;
             let startTimestamp = null;
+            const ease = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // ease-in-out quad
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                element.textContent = value;
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
+                el.textContent = Math.floor(ease(progress) * target) + suffix;
+                if (progress < 1) window.requestAnimationFrame(step);
             };
             window.requestAnimationFrame(step);
         }
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.counter').forEach(el => {
+                        if (!el.dataset.animated) {
+                            el.dataset.animated = '1';
+                            animateCounter(el);
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.4 });
+
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) counterObserver.observe(aboutSection);
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const answer = item.querySelector('.faq-answer');
+                const isOpen = item.classList.contains('open');
+
+                // Close all
+                document.querySelectorAll('.faq-item.open').forEach(openItem => {
+                    openItem.classList.remove('open');
+                    openItem.querySelector('.faq-answer').style.maxHeight = '0';
+                });
+
+                // Toggle current
+                if (!isOpen) {
+                    item.classList.add('open');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Service items + FAQ stagger
+        document.querySelectorAll('.service-item, .faq-item').forEach((el, index) => {
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setTimeout(() => el.classList.add('visible'), index * 100);
+                    observer.unobserve(el);
+                }
+            }, { threshold: 0.15 });
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
