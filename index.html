@@ -1063,9 +1063,122 @@
     .contact-right, .contact-left, .about-left, .about-right { padding: 2rem 1.5rem; }
     #hero,#products,#work,#websites,#opensource,#testimonials,#faq,#about,#contact { padding: 5rem 0; }
   }
+  /* ── LOADER ───────────────────── */
+  #loader { position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .6s,visibility .6s; }
+  #loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .loader-logo{font-family:var(--mono);font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent)}
+  .loader-bar-wrap{width:200px;height:1px;background:var(--border);position:relative;overflow:hidden}
+  .loader-bar{position:absolute;left:0;top:0;bottom:0;background:var(--accent);width:0%;transition:width .05s linear}
+  .loader-num{font-family:var(--mono);font-size:.65rem;color:var(--dim);letter-spacing:.2em}
+  /* ── SIDE NAV ─────────────────── */
+  #side-nav{position:fixed;right:2rem;top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:.8rem;opacity:0;transition:opacity .4s}
+  #side-nav.visible{opacity:1}
+  .snav-dot{width:6px;height:6px;border-radius:50%;border:1px solid var(--dim);cursor:none;transition:background .3s,border-color .3s,transform .3s;position:relative}
+  .snav-dot.active{background:var(--accent);border-color:var(--accent);transform:scale(1.4)}
+  .snav-dot:hover{border-color:var(--accent)}
+  .snav-dot::after{content:attr(data-label);position:absolute;right:calc(100% + .8rem);top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+  .snav-dot:hover::after{opacity:1}
+  /* ── HERO CANVAS ──────────────── */
+  #hero-canvas{position:absolute;inset:0;z-index:0;opacity:.55}
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">/* ── LOADER ─────────────────────────── */
+(function(){
+  var lbar=document.getElementById('lbar'), lnum=document.getElementById('lnum'), loader=document.getElementById('loader'), pct=0;
+  var iv=setInterval(function(){
+    pct+=Math.random()*12; if(pct>100)pct=100;
+    lbar.style.width=pct+'%'; lnum.textContent=Math.floor(pct)+'%';
+    if(pct>=100){clearInterval(iv);setTimeout(function(){loader.classList.add('hidden');initHeroAnim();initSideNav();},300);}
+  },80);
+})();
+/!* ── THREE.JS HERO ────────────────── *!
+function initHeroAnim(){
+  var cvs=document.getElementById('hero-canvas');
+  if(!cvs||!window.THREE)return;
+  try{
+    var renderer=new THREE.WebGLRenderer({canvas:cvs,antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,.1,100);
+    camera.position.z=4.5;
+    var tGeo=new THREE.TorusKnotGeometry(1,.32,140,16,3,5);
+    var tMat=new THREE.MeshBasicMaterial({color:0x00e5ff,wireframe:true,opacity:.18,transparent:true});
+    var torus=new THREE.Mesh(tGeo,tMat); scene.add(torus);
+    var rGeo=new THREE.TorusGeometry(2.2,.01,8,80);
+    var rMat=new THREE.MeshBasicMaterial({color:0x00e5ff,opacity:.08,transparent:true});
+    var ring3d=new THREE.Mesh(rGeo,rMat); ring3d.rotation.x=Math.PI/2.5; scene.add(ring3d);
+    var pc=600, pp=new Float32Array(pc*3);
+    for(var i=0;i<pc*3;i++)pp[i]=(Math.random()-.5)*14;
+    var pG=new THREE.BufferGeometry(); pG.setAttribute('position',new THREE.BufferAttribute(pp,3));
+    scene.add(new THREE.Points(pG,new THREE.PointsMaterial({color:0x00e5ff,size:.025,opacity:.3,transparent:true})));
+    var sG=new THREE.IcosahedronGeometry(.6,1);
+    var sM=new THREE.MeshBasicMaterial({color:0xff4d00,wireframe:true,opacity:.08,transparent:true});
+    var sph=new THREE.Mesh(sG,sM); sph.position.set(2.5,-1,-1); scene.add(sph);
+    var tx=0,ty=0,tcx=0,tcy=0;
+    document.addEventListener('mousemove',function(e){tx=(e.clientX/window.innerWidth-.5)*1.2;ty=(e.clientY/window.innerHeight-.5)*-.8;});
+    window.addEventListener('resize',function(){camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+    var ck=new THREE.Clock();
+    (function anim(){requestAnimationFrame(anim);
+      var t=ck.getElapsedTime();
+      torus.rotation.x=t*.08; torus.rotation.y=t*.12; ring3d.rotation.z=t*.04; sph.rotation.y=t*.15;
+      tcx+=(tx-tcx)*.04; tcy+=(ty-tcy)*.04;
+      scene.rotation.y=tcx*.3; scene.rotation.x=tcy*.2;
+      renderer.render(scene,camera);
+    })();
+  }catch(e){console.warn('WebGL error:',e);}
+}
+/!* ── SIDE NAV ───────────────────────── *!
+function initSideNav(){
+  var sN=document.getElementById('side-nav'); if(!sN)return;
+  var dots=document.querySelectorAll('.snav-dot');
+  var secs=document.querySelectorAll('section[id]');
+  var nO=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){dots.forEach(function(d){d.classList.remove('active')});var a=document.querySelector('.snav-dot[data-section="'+e.target.id+'"]');if(a)a.classList.add('active');}})},{threshold:.4});
+  secs.forEach(function(s){nO.observe(s);});
+  dots.forEach(function(d){d.addEventListener('click',function(){var sec=document.getElementById(d.dataset.section);if(sec)sec.scrollIntoView({behavior:'smooth'})})});
+  window.addEventListener('scroll',function(){sN.classList.toggle('visible',window.scrollY>200)});
+}
+/!* ── CONTACT FORMSPREE ───────────────── *!
+(function(){
+  var f=document.getElementById('contact-form'), s=document.getElementById('form-success');
+  if(!f||!s)return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=f.querySelector('.form-submit'), orig=btn?btn.textContent:'';
+    if(btn){btn.textContent='→ Sending...';btn.disabled=true;}
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      .then(function(r){if(r.ok){f.style.display='none';s.style.display='block'}else{if(btn){btn.textContent=orig;btn.disabled=false;}}})
+      .catch(function(){if(btn){btn.textContent=orig;btn.disabled=false;}});
+  });
+})();
+
+</script>
 </head>
 <body>
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">MKN_STUDIO</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="lbar"></div></div>
+  <div class="loader-num" id="lnum">0%</div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- SIDE NAV -->
+<nav id="side-nav">
+  <div class="snav-dot" data-section="hero" data-label="Home"></div>
+  <div class="snav-dot" data-section="products" data-label="Products"></div>
+  <div class="snav-dot" data-section="work" data-label="Work"></div>
+  <div class="snav-dot" data-section="websites" data-label="Websites"></div>
+  <div class="snav-dot" data-section="opensource" data-label="Open Source"></div>
+  <div class="snav-dot" data-section="testimonials" data-label="Clients"></div>
+  <div class="snav-dot" data-section="faq" data-label="FAQ"></div>
+  <div class="snav-dot" data-section="about" data-label="About"></div>
+  <div class="snav-dot" data-section="contact" data-label="Contact"></div>
+</nav>
+
 
 <!-- Cursor -->
 <div id="cursor"></div>
@@ -1087,6 +1200,7 @@
 
 <!-- HERO -->
 <section id="hero">
+  <canvas id="hero-canvas"></canvas>
   <div class="hero-grid grid-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
@@ -1558,24 +1672,23 @@
         </div>
       </div>
       <div class="contact-right">
-        <form id="contact-form" action="https://formspree.io/f/xqewyozw" method="POST">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Name</label>
-            <input type="text" name="name" class="form-input" placeholder="Your name" required>
+            <input type="text" class="form-input" placeholder="Your name">
           </div>
           <div class="form-group">
             <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
+            <input type="email" class="form-input" placeholder="your@email.com">
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Company</label>
-          <input type="text" name="company" class="form-input" placeholder="Company name">
+          <input type="text" class="form-input" placeholder="Company name">
         </div>
         <div class="form-group">
           <label class="form-label">Budget Range</label>
-          <select name="budget" class="form-select">
+          <select class="form-select">
             <option value="">Select a range</option>
             <option>R5,000 – R15,000</option>
             <option>R15,000 – R30,000</option>
@@ -1586,11 +1699,9 @@
         </div>
         <div class="form-group">
           <label class="form-label">Describe Your Workflow</label>
-          <textarea name="message" class="form-textarea" placeholder="Tell us what you need automated..." required></textarea>
+          <textarea class="form-textarea" placeholder="Tell us what you need automated..."></textarea>
         </div>
-        <button type="submit" class="form-submit">→ Send Message</button>
-        </form>
-        <div id="form-success" style="display:none;padding:1.2rem;border:1px solid var(--accent);color:var(--accent);font-family:var(--font-mono);font-size:.85rem;margin-top:1rem;text-align:center;">✓ Message sent — we'll be in touch within 48 hours.</div>
+        <button class="form-submit">→ Send Message</button>
       </div>
     </div>
   </div>
@@ -1705,33 +1816,76 @@
   }, { threshold: 0.3 });
   const aboutStats = document.querySelector('.about-stats');
   if (aboutStats) statObs.observe(aboutStats);
+/* ── LOADER ─────────────────────────── */
+(function(){
+  var lbar=document.getElementById('lbar'), lnum=document.getElementById('lnum'), loader=document.getElementById('loader'), pct=0;
+  var iv=setInterval(function(){
+    pct+=Math.random()*12; if(pct>100)pct=100;
+    lbar.style.width=pct+'%'; lnum.textContent=Math.floor(pct)+'%';
+    if(pct>=100){clearInterval(iv);setTimeout(function(){loader.classList.add('hidden');initHeroAnim();initSideNav();},300);}
+  },80);
+})();
+/!* ── THREE.JS HERO ────────────────── *!
+function initHeroAnim(){
+  var cvs=document.getElementById('hero-canvas');
+  if(!cvs||!window.THREE)return;
+  try{
+    var renderer=new THREE.WebGLRenderer({canvas:cvs,antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,.1,100);
+    camera.position.z=4.5;
+    var tGeo=new THREE.TorusKnotGeometry(1,.32,140,16,3,5);
+    var tMat=new THREE.MeshBasicMaterial({color:0x00e5ff,wireframe:true,opacity:.18,transparent:true});
+    var torus=new THREE.Mesh(tGeo,tMat); scene.add(torus);
+    var rGeo=new THREE.TorusGeometry(2.2,.01,8,80);
+    var rMat=new THREE.MeshBasicMaterial({color:0x00e5ff,opacity:.08,transparent:true});
+    var ring3d=new THREE.Mesh(rGeo,rMat); ring3d.rotation.x=Math.PI/2.5; scene.add(ring3d);
+    var pc=600, pp=new Float32Array(pc*3);
+    for(var i=0;i<pc*3;i++)pp[i]=(Math.random()-.5)*14;
+    var pG=new THREE.BufferGeometry(); pG.setAttribute('position',new THREE.BufferAttribute(pp,3));
+    scene.add(new THREE.Points(pG,new THREE.PointsMaterial({color:0x00e5ff,size:.025,opacity:.3,transparent:true})));
+    var sG=new THREE.IcosahedronGeometry(.6,1);
+    var sM=new THREE.MeshBasicMaterial({color:0xff4d00,wireframe:true,opacity:.08,transparent:true});
+    var sph=new THREE.Mesh(sG,sM); sph.position.set(2.5,-1,-1); scene.add(sph);
+    var tx=0,ty=0,tcx=0,tcy=0;
+    document.addEventListener('mousemove',function(e){tx=(e.clientX/window.innerWidth-.5)*1.2;ty=(e.clientY/window.innerHeight-.5)*-.8;});
+    window.addEventListener('resize',function(){camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+    var ck=new THREE.Clock();
+    (function anim(){requestAnimationFrame(anim);
+      var t=ck.getElapsedTime();
+      torus.rotation.x=t*.08; torus.rotation.y=t*.12; ring3d.rotation.z=t*.04; sph.rotation.y=t*.15;
+      tcx+=(tx-tcx)*.04; tcy+=(ty-tcy)*.04;
+      scene.rotation.y=tcx*.3; scene.rotation.x=tcy*.2;
+      renderer.render(scene,camera);
+    })();
+  }catch(e){console.warn('WebGL error:',e);}
+}
+/!* ── SIDE NAV ───────────────────────── *!
+function initSideNav(){
+  var sN=document.getElementById('side-nav'); if(!sN)return;
+  var dots=document.querySelectorAll('.snav-dot');
+  var secs=document.querySelectorAll('section[id]');
+  var nO=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){dots.forEach(function(d){d.classList.remove('active')});var a=document.querySelector('.snav-dot[data-section="'+e.target.id+'"]');if(a)a.classList.add('active');}})},{threshold:.4});
+  secs.forEach(function(s){nO.observe(s);});
+  dots.forEach(function(d){d.addEventListener('click',function(){var sec=document.getElementById(d.dataset.section);if(sec)sec.scrollIntoView({behavior:'smooth'})})});
+  window.addEventListener('scroll',function(){sN.classList.toggle('visible',window.scrollY>200)});
+}
+/!* ── CONTACT FORMSPREE ───────────────── *!
+(function(){
+  var f=document.getElementById('contact-form'), s=document.getElementById('form-success');
+  if(!f||!s)return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=f.querySelector('.form-submit'), orig=btn?btn.textContent:'';
+    if(btn){btn.textContent='→ Sending...';btn.disabled=true;}
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      .then(function(r){if(r.ok){f.style.display='none';s.style.display='block'}else{if(btn){btn.textContent=orig;btn.disabled=false;}}})
+      .catch(function(){if(btn){btn.textContent=orig;btn.disabled=false;}});
+  });
+})();
 
-/* ── CONTACT FORM (Formspree) ─────────────────────────────── */
-  const contactForm = document.getElementById('contact-form');
-  const formSuccess = document.getElementById('form-success');
-  if (contactForm && formSuccess) {
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = contactForm.querySelector('.form-submit');
-      const orig = btn ? btn.textContent : '';
-      if (btn) { btn.textContent = '→ Sending...'; btn.disabled = true; }
-      try {
-        const res = await fetch(contactForm.action, {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: { 'Accept': 'application/json' },
-        });
-        if (res.ok) {
-          contactForm.style.display = 'none';
-          formSuccess.style.display = 'block';
-        } else {
-          if (btn) { btn.textContent = orig; btn.disabled = false; }
-        }
-      } catch {
-        if (btn) { btn.textContent = orig; btn.disabled = false; }
-      }
-    });
-  }
 </script>
 </body>
 </html>
