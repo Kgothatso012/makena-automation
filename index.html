@@ -1083,14 +1083,41 @@
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">/* ── LOADER ─────────────────────────── */
-(function(){
-  var lbar=document.getElementById('lbar'), lnum=document.getElementById('lnum'), loader=document.getElementById('loader'), pct=0;
-  var iv=setInterval(function(){
-    pct+=Math.random()*12; if(pct>100)pct=100;
-    lbar.style.width=pct+'%'; lnum.textContent=Math.floor(pct)+'%';
-    if(pct>=100){clearInterval(iv);setTimeout(function(){loader.classList.add('hidden');initHeroAnim();initSideNav();},300);}
-  },80);
-})();
+// Loader — fires when DOM is ready, max 2s then forces reveal
+window.addEventListener('DOMContentLoaded', function() {
+  var lbar = document.getElementById('lbar');
+  var lnum = document.getElementById('lnum');
+  var loader = document.getElementById('loader');
+  if (!lbar || !lnum || !loader) {
+    // Elements missing — skip loader entirely
+    if (loader) loader.classList.add('hidden');
+    try { initHeroAnim(); } catch(e) {}
+    try { initSideNav(); } catch(e) {}
+    return;
+  }
+  var pct = 0;
+  var iv = setInterval(function() {
+    pct += Math.random() * 12;
+    if (pct > 100) pct = 100;
+    lbar.style.width = pct + '%';
+    lnum.textContent = Math.floor(pct) + '%';
+    if (pct >= 100) {
+      clearInterval(iv);
+      setTimeout(function() {
+        loader.classList.add('hidden');
+        try { initHeroAnim(); } catch(e) {}
+        try { initSideNav(); } catch(e) {}
+      }, 300);
+    }
+  }, 80);
+  // Safety fallback: force reveal after 2.5s
+  setTimeout(function() {
+    clearInterval(iv);
+    loader.classList.add('hidden');
+    try { initHeroAnim(); } catch(e) {}
+    try { initSideNav(); } catch(e) {}
+  }, 2500);
+});
 /!* ── THREE.JS HERO ────────────────── *!
 function initHeroAnim(){
   var cvs=document.getElementById('hero-canvas');
@@ -1817,14 +1844,41 @@ function initSideNav(){
   const aboutStats = document.querySelector('.about-stats');
   if (aboutStats) statObs.observe(aboutStats);
 /* ── LOADER ─────────────────────────── */
-(function(){
-  var lbar=document.getElementById('lbar'), lnum=document.getElementById('lnum'), loader=document.getElementById('loader'), pct=0;
-  var iv=setInterval(function(){
-    pct+=Math.random()*12; if(pct>100)pct=100;
-    lbar.style.width=pct+'%'; lnum.textContent=Math.floor(pct)+'%';
-    if(pct>=100){clearInterval(iv);setTimeout(function(){loader.classList.add('hidden');initHeroAnim();initSideNav();},300);}
-  },80);
-})();
+// Loader — fires when DOM is ready, max 2s then forces reveal
+window.addEventListener('DOMContentLoaded', function() {
+  var lbar = document.getElementById('lbar');
+  var lnum = document.getElementById('lnum');
+  var loader = document.getElementById('loader');
+  if (!lbar || !lnum || !loader) {
+    // Elements missing — skip loader entirely
+    if (loader) loader.classList.add('hidden');
+    try { initHeroAnim(); } catch(e) {}
+    try { initSideNav(); } catch(e) {}
+    return;
+  }
+  var pct = 0;
+  var iv = setInterval(function() {
+    pct += Math.random() * 12;
+    if (pct > 100) pct = 100;
+    lbar.style.width = pct + '%';
+    lnum.textContent = Math.floor(pct) + '%';
+    if (pct >= 100) {
+      clearInterval(iv);
+      setTimeout(function() {
+        loader.classList.add('hidden');
+        try { initHeroAnim(); } catch(e) {}
+        try { initSideNav(); } catch(e) {}
+      }, 300);
+    }
+  }, 80);
+  // Safety fallback: force reveal after 2.5s
+  setTimeout(function() {
+    clearInterval(iv);
+    loader.classList.add('hidden');
+    try { initHeroAnim(); } catch(e) {}
+    try { initSideNav(); } catch(e) {}
+  }, 2500);
+});
 /!* ── THREE.JS HERO ────────────────── *!
 function initHeroAnim(){
   var cvs=document.getElementById('hero-canvas');
