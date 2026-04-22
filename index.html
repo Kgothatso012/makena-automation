@@ -1558,23 +1558,24 @@
         </div>
       </div>
       <div class="contact-right">
+        <form id="contact-form" action="https://formspree.io/f/xqewyozw" method="POST">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Name</label>
-            <input type="text" class="form-input" placeholder="Your name">
+            <input type="text" name="name" class="form-input" placeholder="Your name" required>
           </div>
           <div class="form-group">
             <label class="form-label">Email</label>
-            <input type="email" class="form-input" placeholder="your@email.com">
+            <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Company</label>
-          <input type="text" class="form-input" placeholder="Company name">
+          <input type="text" name="company" class="form-input" placeholder="Company name">
         </div>
         <div class="form-group">
           <label class="form-label">Budget Range</label>
-          <select class="form-select">
+          <select name="budget" class="form-select">
             <option value="">Select a range</option>
             <option>R5,000 – R15,000</option>
             <option>R15,000 – R30,000</option>
@@ -1585,9 +1586,11 @@
         </div>
         <div class="form-group">
           <label class="form-label">Describe Your Workflow</label>
-          <textarea class="form-textarea" placeholder="Tell us what you need automated..."></textarea>
+          <textarea name="message" class="form-textarea" placeholder="Tell us what you need automated..." required></textarea>
         </div>
-        <button class="form-submit">→ Send Message</button>
+        <button type="submit" class="form-submit">→ Send Message</button>
+        </form>
+        <div id="form-success" style="display:none;padding:1.2rem;border:1px solid var(--accent);color:var(--accent);font-family:var(--font-mono);font-size:.85rem;margin-top:1rem;text-align:center;">✓ Message sent — we'll be in touch within 48 hours.</div>
       </div>
     </div>
   </div>
@@ -1702,6 +1705,33 @@
   }, { threshold: 0.3 });
   const aboutStats = document.querySelector('.about-stats');
   if (aboutStats) statObs.observe(aboutStats);
+
+/* ── CONTACT FORM (Formspree) ─────────────────────────────── */
+  const contactForm = document.getElementById('contact-form');
+  const formSuccess = document.getElementById('form-success');
+  if (contactForm && formSuccess) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = contactForm.querySelector('.form-submit');
+      const orig = btn ? btn.textContent : '';
+      if (btn) { btn.textContent = '→ Sending...'; btn.disabled = true; }
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (res.ok) {
+          contactForm.style.display = 'none';
+          formSuccess.style.display = 'block';
+        } else {
+          if (btn) { btn.textContent = orig; btn.disabled = false; }
+        }
+      } catch {
+        if (btn) { btn.textContent = orig; btn.disabled = false; }
+      }
+    });
+  }
 </script>
 </body>
 </html>
