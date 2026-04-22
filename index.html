@@ -1083,41 +1083,49 @@
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">/* ── LOADER ─────────────────────────── */
-// Loader — fires when DOM is ready, max 2s then forces reveal
-window.addEventListener('DOMContentLoaded', function() {
+// Runs immediately but element checks prevent errors
+(function() {
   var lbar = document.getElementById('lbar');
   var lnum = document.getElementById('lnum');
   var loader = document.getElementById('loader');
+  // If loader elements missing, skip loader
   if (!lbar || !lnum || !loader) {
-    // Elements missing — skip loader entirely
-    if (loader) loader.classList.add('hidden');
-    try { initHeroAnim(); } catch(e) {}
-    try { initSideNav(); } catch(e) {}
+    if (loader) loader.style.display = 'none';
+    try { if (typeof initSideNav === 'function') initSideNav(); } catch(e) {}
     return;
   }
   var pct = 0;
+  var done = false;
+  function finish() {
+    if (done) return;
+    done = true;
+    clearInterval(iv);
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.5s';
+    setTimeout(function() {
+      loader.style.display = 'none';
+      try { if (typeof initSideNav === 'function') initSideNav(); } catch(e) {}
+    }, 500);
+  }
   var iv = setInterval(function() {
-    pct += Math.random() * 12;
+    if (done) return;
+    pct += Math.random() * 10;
     if (pct > 100) pct = 100;
     lbar.style.width = pct + '%';
     lnum.textContent = Math.floor(pct) + '%';
-    if (pct >= 100) {
-      clearInterval(iv);
-      setTimeout(function() {
-        loader.classList.add('hidden');
-        try { initHeroAnim(); } catch(e) {}
-        try { initSideNav(); } catch(e) {}
-      }, 300);
-    }
-  }, 80);
-  // Safety fallback: force reveal after 2.5s
-  setTimeout(function() {
-    clearInterval(iv);
-    loader.classList.add('hidden');
+    if (pct >= 100) finish();
+  }, 70);
+  // Safety fallback
+  setTimeout(finish, 2500);
+})();
+// Three.js hero loads async — init when script is ready
+if (window.THREE) {
+  try { initHeroAnim(); } catch(e) {}
+} else {
+  window.addEventListener('load', function() {
     try { initHeroAnim(); } catch(e) {}
-    try { initSideNav(); } catch(e) {}
-  }, 2500);
-});
+  });
+}
 /!* ── THREE.JS HERO ────────────────── *!
 function initHeroAnim(){
   var cvs=document.getElementById('hero-canvas');
@@ -1844,41 +1852,49 @@ function initSideNav(){
   const aboutStats = document.querySelector('.about-stats');
   if (aboutStats) statObs.observe(aboutStats);
 /* ── LOADER ─────────────────────────── */
-// Loader — fires when DOM is ready, max 2s then forces reveal
-window.addEventListener('DOMContentLoaded', function() {
+// Runs immediately but element checks prevent errors
+(function() {
   var lbar = document.getElementById('lbar');
   var lnum = document.getElementById('lnum');
   var loader = document.getElementById('loader');
+  // If loader elements missing, skip loader
   if (!lbar || !lnum || !loader) {
-    // Elements missing — skip loader entirely
-    if (loader) loader.classList.add('hidden');
-    try { initHeroAnim(); } catch(e) {}
-    try { initSideNav(); } catch(e) {}
+    if (loader) loader.style.display = 'none';
+    try { if (typeof initSideNav === 'function') initSideNav(); } catch(e) {}
     return;
   }
   var pct = 0;
+  var done = false;
+  function finish() {
+    if (done) return;
+    done = true;
+    clearInterval(iv);
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.5s';
+    setTimeout(function() {
+      loader.style.display = 'none';
+      try { if (typeof initSideNav === 'function') initSideNav(); } catch(e) {}
+    }, 500);
+  }
   var iv = setInterval(function() {
-    pct += Math.random() * 12;
+    if (done) return;
+    pct += Math.random() * 10;
     if (pct > 100) pct = 100;
     lbar.style.width = pct + '%';
     lnum.textContent = Math.floor(pct) + '%';
-    if (pct >= 100) {
-      clearInterval(iv);
-      setTimeout(function() {
-        loader.classList.add('hidden');
-        try { initHeroAnim(); } catch(e) {}
-        try { initSideNav(); } catch(e) {}
-      }, 300);
-    }
-  }, 80);
-  // Safety fallback: force reveal after 2.5s
-  setTimeout(function() {
-    clearInterval(iv);
-    loader.classList.add('hidden');
+    if (pct >= 100) finish();
+  }, 70);
+  // Safety fallback
+  setTimeout(finish, 2500);
+})();
+// Three.js hero loads async — init when script is ready
+if (window.THREE) {
+  try { initHeroAnim(); } catch(e) {}
+} else {
+  window.addEventListener('load', function() {
     try { initHeroAnim(); } catch(e) {}
-    try { initSideNav(); } catch(e) {}
-  }, 2500);
-});
+  });
+}
 /!* ── THREE.JS HERO ────────────────── *!
 function initHeroAnim(){
   var cvs=document.getElementById('hero-canvas');
