@@ -109,6 +109,51 @@ Kgothatso
 
 ---
 
+## EMAIL 5 — Website Prospecting (Companies with no/weak web presence)
+
+**Subject:** `[Company Name] — professional website, R12,000, delivered in 10 days`
+
+---
+
+Hi `[Name]`,
+
+I noticed [Company Name] doesn't have a professional website — or the current one is hard to find and doesn't represent the work you do.
+
+I build websites for engineering, surveying, and construction firms in Gauteng. Fixed price, delivered in 10 days.
+
+Examples:
+- Centurion Surveyors (R12,000) — project showcase, contact form, Google Maps
+- TSH Architects (R18,500) — portfolio gallery, testimonials, inquiry pipeline
+- Makena Automation Studios (R25,000) — dark-theme SaaS site
+
+**Starting at R8,000** for a professional business presence. No monthly fees. Host where you like.
+
+If you're happy with your current web presence, no worries — just passing through. But if a proper site would help win work or look more established, happy to share a mockup.
+
+Kgothatso Makena
+Makena Automation Studios
++27 (0)71 123 4567
+
+---
+
+## EMAIL 6 — Follow-Up Website (5 days after no reply to Email 5)
+
+**Subject:** `Hi [Name] — one more thing`
+
+---
+
+Hi `[Name]`,
+
+Sent this through last week — if the website conversation isn't relevant right now, just say the word and I'll leave you alone.
+
+If it is relevant but the timing is off, I can follow up in a month or two when it makes more sense.
+
+Either way — good luck with the `[current project/season]`.
+
+Kgothatso
+
+---
+
 ## Target Companies (Cold Prospects — Gauteng)
 
 ### Civil Engineering & Surveying
@@ -140,6 +185,57 @@ Kgothatso
 - Curro Holdings
 - ADvTECH group
 - Independent schools in Midrand, Centurion, Pretoria
+
+---
+
+## Website Lead Research (Jan 2025) — Gauteng
+
+### TOP PRIORITY — No website found
+| Company | Location | Services |
+|---------|----------|----------|
+| Aureliance Engineering | Centurion | Engineering Consulting |
+| Infinity Surveys | Centurion | Land Surveying |
+| Dewet & Partners Surveyors | Centurion | Surveying |
+| Pythagoras QS | Centurion | Quantity Surveying |
+| Solid QS | Centurion | Quantity Surveying |
+| JHI Construction | Johannesburg | Construction |
+| Nthataha Construction | Pretoria | Construction |
+| Mega Tech Construction | Centurion | Construction |
+| Sedibeng Construction | Vereeniging | Construction |
+| Maboko & Associates | Centurion | Engineering/Construction |
+| Moloto Engineering | Pretoria | Engineering |
+| Gomolemo Engineering | Centurion | Engineering |
+| JMV Construction | Centurion | Construction |
+| AB Land Surveying | Centurion | Land Surveying |
+| Tilt Rock Engineering | Pretoria | Geotechnical Engineering |
+| Prodim Engineering | Centurion | Industrial Engineering |
+
+### SECONDARY — Weak/outdated website (easy upgrade)
+| Company | Location | Services |
+|---------|----------|----------|
+| Niche Consulting Engineers | Centurion | Civil/Structural Engineering |
+| MSS Consulting Engineers | Johannesburg | Structural/Civil |
+| Talabi Consulting Engineers | Centurion | Civil/Structural (012 661 8917) |
+| Esanda Engineering | Pretoria | Mining Engineering |
+| BEM Engineering | Centurion | Electrical/Mechanical |
+| Infraserve Group | Centurion | Infrastructure Engineering |
+| DPS Consulting | Centurion | Engineering/Project Management |
+| SAS Surveying | Centurion | Land/Quantity Surveying |
+| Land Surveyors Pretoria | Pretoria | Professional Surveying (012 323 1234) |
+| Van Zyl Surveying | Pretoria | Land Surveying |
+| Eunice Quantity Surveyors | Centurion | Quantity Surveying |
+| BQR Quantity Surveyors | Centurion | Quantity Surveying |
+| Arc Quantity Surveyors | Johannesburg | Quantity Surveying |
+| Concore Construction | Centurion | Construction |
+| Stessco Group | Centurion | Construction |
+| Axis Construction | Centurion | Construction |
+
+### CONSTRUCTION (mostly no website)
+- E+PC — Centurion — Construction/Project Management (outdated)
+- Centurion Project Managers — Centurion
+- Mega Brick — Centurion — Construction Materials
+- Pretoria West Construction — Pretoria
+- Tshireletso Construction — Pretoria
 
 ---
 
